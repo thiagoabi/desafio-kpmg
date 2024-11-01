@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <div class="mb-3">
+    <label for="resolutionDetails" class="form-label">Deatalhes da Resolução</label>
+    <textarea id="resolutionDetails" class="form-control" formControlName="resolutionDetails" required></textarea>
+    <div *ngIf="form.get('resolutionDetails')?.invalid && form.get('resolutionDetails')?.touched" class="text-danger">
+      A detalhes é obrigatório.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="resolutionDate" class="form-label">Data da Resolução</label>
+    <input type="date" id="resolutionDate" class="form-control" formControlName="resolutionDate" required>
+    <div *ngIf="form.get('resolutionDate')?.invalid && form.get('resolutionDate')?.touched" class="text-danger">
+      A data da resolução é obrigatória.
+    </div>
+  </div>
+</form>
+<app-loading></app-loading>

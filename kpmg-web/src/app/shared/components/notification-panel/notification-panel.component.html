@@ -1,0 +1,27 @@
+<c-modal id="modalNotifications" role="" [visible]="isModalOpen">
+  <c-modal-header>
+    <h5 cModalTitle>Notificações</h5> 
+    <button (click)="closeModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <c-accordion [alwaysOpen]="true" *ngIf="data">
+      <c-accordion-item #item0="cAccordionItem" [visible]="false" *ngFor="let notification of data">
+        <ng-template cTemplateId="accordionHeaderTemplate">
+          <button (click)="setNotificationRead(item0, notification.Id)" [collapsed]="!item0.visible" cAccordionButton>
+            <strong>{{ notification.NotificationDate | date: 'dd/MM/yyyy' }}</strong> -  {{ notification.Message.slice(0, 10) }} ...
+          </button>
+        </ng-template>
+        <ng-template cTemplateId="accordionBodyTemplate">
+          <div class="accordion-body">
+            {{ notification.Message }}
+          </div>
+        </ng-template>
+      </c-accordion-item>
+    </c-accordion>
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="info" (click)="closeModal()">
+      Fechar
+    </button>
+  </c-modal-footer>
+</c-modal>

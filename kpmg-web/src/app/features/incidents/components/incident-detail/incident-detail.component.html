@@ -1,0 +1,47 @@
+<div class="container incident-content" *ngIf="incident">
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 incident-item">
+      <span class="incident-title">Tipo de Incidente:</span>
+      <span class="incident-value">{{ incident.incidentType | enumDescription:'EnumIncidentType' }}</span>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12 incident-item">
+      <span class="incident-title">Nível de Gravidade:</span>
+      <span class="incident-value">{{ incident.severityLevel | enumDescription:'EnumSeverityLevel' }}</span>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12 incident-item">
+      <span class="incident-title">Resolvido:</span>
+      <span class="incident-value">{{ incident.isResolved ? 'Sim' : 'Não' }}</span>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-12 incident-item">
+      <span class="incident-title">Data do Incidente:</span>
+      <span class="incident-value">{{ incident.incidentDate | date: 'dd/MM/yyyy' }}</span>
+    </div>
+    <div class="col-12 incident-item">
+      <span class="incident-title">Descrição:</span>
+      <span class="incident-value">{{ incident.description }}</span>
+    </div>
+    <div *ngIf="incident.isResolved" class="col-lg-12 col-md-12 col-sm-12 incident-item">
+      <span class="incident-title">Data de Resolução:</span>
+      <span class="incident-value">{{ incident.resolutionDate | date: 'dd/MM/yyyy' }}</span>
+    </div>
+    <div *ngIf="incident.isResolved" class="col-lg-12 col-md-12 col-sm-12 incident-item">
+      <span class="incident-title">Detalhes da Resolução:</span>
+      <span class="incident-value">{{ incident.resolutionDetails }}</span>
+    </div>
+    <div class="row">
+      
+    <div class="col-lg-3 col-md-3 col-sm-12 incident-item">
+      <span class="incident-title">Usuário:</span>
+      <span class="incident-value">{{ incident.userName }}</span>
+    </div>
+      <div class="col-lg-3 col-md-3 incident-item">
+        <span class="incident-title">Criado Em:</span>
+        <span class="incident-value">{{ incident.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+      <div class="col-lg-3 col-md-3incident-item" *ngIf="incident.updatedAt">
+        <span class="incident-title">Atualizado Em:</span>
+        <span class="incident-value">{{ incident.updatedAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

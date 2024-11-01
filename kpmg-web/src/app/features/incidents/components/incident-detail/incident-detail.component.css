@@ -1,0 +1,12 @@
+.incident-item {
+  margin-bottom: 1rem;
+}
+
+.incident-title {
+  font-weight: bold;
+  display: block;
+}
+
+.incident-value {
+  display: block;
+}

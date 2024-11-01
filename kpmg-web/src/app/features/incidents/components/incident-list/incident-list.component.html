@@ -1,0 +1,92 @@
+<c-card>
+  <c-card-header>
+    <h5>{{ TextResources.Incidents.List.Title }}</h5>
+  </c-card-header>
+  <c-card-body>
+    <div class="text-end">
+      <button cButton shape="rounded-pill" size="sm" color="success" class="text-white" (click)="openCreateModal()">
+        {{ TextResources.Incidents.List.ButtonNew }}
+      </button>
+    </div>
+    <table *ngIf="data" striped cTable>
+      <thead>
+        <tr>
+          <th class="text-center" scope="col">Descrição</th>
+          <th class="text-center" scope="col">Tipo</th>
+          <th class="text-center" scope="col">Nível</th>
+          <th class="text-center" scope="col">Data do Incidente</th>
+          <th class="text-center" scope="col">Status</th>
+          <th class="text-center" scope="col">Resolvido</th>
+          <th class="text-center" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data">
+          <td>{{ item.description }}</td>
+          <td class="text-center">{{ item.incidentType | enumDescription:'EnumIncidentType' }}</td>
+          <td class="text-center">{{ item.severityLevel | enumDescription:'EnumSeverityLevel' }}</td>
+          <td class="text-center">{{ item.incidentDate | date: 'dd/MM/yyyy' }}</td>
+          <td class="text-center">{{ item.isResolved ? 'Resolvido' : 'Pendente' }}</td>
+          <td class="text-center">{{ item.isResolved ? 'Sim' : 'Não' }}</td>
+          <td>
+            <c-button-group aria-label="Basic example" role="group">
+              <button cButton size="sm" color="primary" (click)="openDetailModal(item)">{{
+                TextResources.Incidents.List.ButtonsAction.Detail }}</button>
+              <button cButton size="sm" color="warning" (click)="openEditModal(item)" *ngIf="!item.isResolved">{{
+                TextResources.Incidents.List.ButtonsAction.Edit}}</button>
+              <button cButton size="sm" color="danger" (click)="onDelete(item.id)">{{
+                TextResources.Incidents.List.ButtonsAction.Delete }}</button>
+            </c-button-group>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </c-card-body>
+</c-card>
+
+<c-modal id="modalCreate" [visible]="visibleCreateModal" (visibleChange)="handleModalCreateClose($event)">
+  <c-modal-header>
+    <h5 cModalTitle>{{ TextResources.Incidents.Create.Title }}</h5>
+    <button (click)="toggleCreateModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <app-incident-create (saveClicked)="afterSave()"></app-incident-create>
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleCreateModal()" cButton color="secondary">
+      {{ TextResources.Default.ButtonClose }}
+    </button>
+    <button cButton color="primary" (click)="onCreate()">{{ TextResources.Default.ButtonSave }}</button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal id="modalUpdate" [visible]="visibleUpdateModal" (visibleChange)="handleModalUpdateClose($event)">
+  <c-modal-header>
+    <h5 cModalTitle>{{ TextResources.Incidents.Update.Title }}</h5>
+    <button (click)="toggleUpdateModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <app-incident-update [incident]="selectedData" (saveClicked)="afterSave()"></app-incident-update>
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleUpdateModal()" cButton color="secondary">
+      {{ TextResources.Default.ButtonClose }}
+    </button>
+    <button cButton color="primary" (click)="onUpdate()">{{ TextResources.Default.ButtonSave }}</button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal id="modalDetail" size="lg" [visible]="visibleDetailModal" (visibleChange)="handleModalDetailClose($event)">
+  <c-modal-header>
+    <h5 cModalTitle>{{ TextResources.Incidents.Detail.Title }}</h5>
+    <button (click)="toggleDetailModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <app-incident-detail [incident]="selectedData"></app-incident-detail>
+  </c-modal-body>
+  <c-modal-footer>
+    <button (click)="toggleDetailModal()" cButton color="secondary">
+      {{ TextResources.Default.ButtonClose }}
+    </button>
+  </c-modal-footer>
+</c-modal>

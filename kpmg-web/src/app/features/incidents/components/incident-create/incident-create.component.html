@@ -1,0 +1,58 @@
+<form [formGroup]="form">
+  <div class="mb-3">
+    <label for="userId" class="form-label">Nome do Usuário</label>
+    <select id="userId" class="form-select" formControlName="userId" required>
+      <option value="" disabled selected>Selecione...</option>
+      <option *ngFor="let user of users" [value]="user.id">
+        {{ user.userName }}
+      </option>
+    </select>
+    <div *ngIf="form.get('userId')?.invalid && form.get('userId')?.touched" class="text-danger">
+      O Usuário do usuário é obrigatório.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="incidentType" class="form-label">Tipo de Incidente</label>
+    <select id="incidentType" class="form-select" formControlName="incidentType" required>
+      <option value="" disabled selected>Selecione...</option>
+      <option *ngFor="let incidentType of EnumIncidentType | enumToSelect: EnumIncidentTypeLabelMapping" [value]="incidentType.value">
+        {{ incidentType.description }}
+      </option>
+    </select>
+    
+    <div *ngIf="form.get('incidentType')?.invalid && form.get('incidentType')?.touched" class="text-danger">
+      O tipo de incidente é obrigatório.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="severityLevel" class="form-label">Nível de Severidade</label>
+    <select id="severityLevel" class="form-select" formControlName="severityLevel" required>
+      <option value="" disabled selected>Selecione...</option>
+      <option *ngFor="let severityLevel of EnumSeverityLevel | enumToSelect: EnumSeverityLevelLabelMapping" [value]="severityLevel.value">
+        {{ severityLevel.description }}
+      </option>
+    </select>
+    <div *ngIf="form.get('severityLevel')?.invalid && form.get('severityLevel')?.touched" class="text-danger">
+      O nível de severidade é obrigatório.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Descrição</label>
+    <textarea id="description" class="form-control" formControlName="description" required></textarea>
+    <div *ngIf="form.get('description')?.invalid && form.get('description')?.touched" class="text-danger">
+      A descrição é obrigatória.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="incidentDate" class="form-label">Data do Incidente</label>
+    <input type="date" id="incidentDate" class="form-control" formControlName="incidentDate" required>
+    <div *ngIf="form.get('incidentDate')?.invalid && form.get('incidentDate')?.touched" class="text-danger">
+      A data do incidente é obrigatória.
+    </div>
+  </div>
+</form>
+<app-loading></app-loading>
