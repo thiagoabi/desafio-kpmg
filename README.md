@@ -20,6 +20,10 @@ Acesseo a Api : https://localhost:44389/swagger
 
 ### WEB
 
+#### Tecnologias utilizadas:
+- Angular 16
+- Dashboard usando o framework CoreUI
+
 Abra o projeto no Visual Code e rode no terminal os comandos abaixo:
 
 #### Instalação inicial
